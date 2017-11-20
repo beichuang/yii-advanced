@@ -11,7 +11,7 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-//    'defaultRoute' => 'site/default',
+    'defaultRoute' => 'site/default',
     'modules' => [],
     'components' => [
         'request' => [
@@ -43,7 +43,17 @@ return [
             'enablePrettyUrl' => true, //是否开启美化路由
             'showScriptName' => false, //是佛展示入口文件
             'suffix' => '.html', //url后缀
-            'rules' => [
+            'rules' => [ //自定义url
+
+                'default/<cat_id:\d>' => 'site/default',
+
+                [
+                    'route' => 'site/category',
+                    'pattern' => 'category/<category_id:\d>',
+                    'defaults' => ['category_id' => 23],
+                    'suffix' => '.json',
+                ],
+
             ],
         ],
 

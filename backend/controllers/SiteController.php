@@ -22,7 +22,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'default'], //ACF信任列表
+                        'actions' => ['login', 'error', 'default', 'category'], //ACF信任列表
                         'allow' => true,
                     ],
                     [
@@ -98,6 +98,18 @@ class SiteController extends Controller
 
     public function actionDefault()
     {
-        return 'default';
+        return 'defaultAction';
+    }
+
+    public function actionCategory($category_id)
+    {
+//        echo $category_id;
+//        return 'actionCategory';
+        $require = Yii::$app->getRequest();
+        echo '<pre>';
+//        var_dump($require->getCookies());
+
+        $response = Yii::$app->getResponse();
+        var_dump($response);
     }
 }
