@@ -38,7 +38,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
+        //http://www.yii-advanced.com
         'urlManager' => [
             'enablePrettyUrl' => true, //是否开启美化路由
             'showScriptName' => false, //是佛展示入口文件
