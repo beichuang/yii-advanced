@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use backend\models\EntryForm;
 
 /**
  * Site controller
@@ -22,7 +23,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'default', 'category'], //ACF信任列表
+                        'actions' => ['login', 'error', 'default', 'category', 'say', 'entry'], //ACF信任列表
                         'allow' => true,
                     ],
                     [
@@ -111,5 +112,22 @@ class SiteController extends Controller
 
         $response = Yii::$app->getResponse();
         var_dump($response);
+    }
+
+    public function actionSay($message = 'Hello')
+    {
+        return $this->render('say', ['message' => $message]);
+    }
+
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            //数据验证通过
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            return $this->render('entry', ['model' => $model]);
+        }
     }
 }
