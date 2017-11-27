@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use backend\models\EntryForm;
+use backend\models\Country;
 
 /**
  * Site controller
@@ -99,7 +100,14 @@ class SiteController extends Controller
 
     public function actionDefault()
     {
-        return 'defaultAction';
+//        return 'defaultAction';
+        $countries = Country::find()->orderBy('name')->asArray()->all();
+//        var_dump($countries);
+        $country = Country::findOne('US');
+        echo $country->name;
+        $country->name = 'U.S.A';
+        $country->save();
+//        var_dump($country);
     }
 
     public function actionCategory($category_id)
