@@ -1,8 +1,12 @@
-<IfModule mod_rewrite.c>
-  Options +FollowSymlinks
-  RewriteEngine On
+<IfModule rewrite_module>
+    #开启重写引擎
+    RewriteEngine on
+    #如果解析的路径是一个目录的话，就不用重写规则进行重写
+    RewriteCond %{REQUEST_FILENAME} !-d
+    #如果解析的路径是一个文件，也就不重写
+    RewriteCond %{REQUEST_FILENAME} !-f
 
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteRule ^(.*)$ index.php?/$1 [QSA,PT,L]
+    #重写规则,将网站(内匹配的内容放在index.php后面进行处理
+    #RewriteRule (.*) index.php/$1
+    RewriteRule (.*) index.php?/$1
 </IfModule>
